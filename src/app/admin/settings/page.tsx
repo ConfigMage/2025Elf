@@ -3,6 +3,8 @@ import { isAuthenticated } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import SettingsForm from './SettingsForm'
 
+export const dynamic = 'force-dynamic'
+
 async function getSettings() {
   try {
     let settings = await prisma.settings.findUnique({ where: { id: 'main' } })

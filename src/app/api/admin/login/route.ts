@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
+
+export const dynamic = 'force-dynamic'
 import { createSession, verifyPassword, SESSION_COOKIE_NAME } from '@/lib/auth'
 
 export async function POST(request: NextRequest) {

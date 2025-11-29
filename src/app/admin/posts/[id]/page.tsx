@@ -3,6 +3,8 @@ import { isAuthenticated } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import EditPostForm from './EditPostForm'
 
+export const dynamic = 'force-dynamic'
+
 async function getPost(id: string) {
   try {
     return await prisma.elfPost.findUnique({ where: { id } })

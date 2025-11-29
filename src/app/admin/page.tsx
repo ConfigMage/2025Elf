@@ -3,6 +3,8 @@ import Link from 'next/link'
 import { isAuthenticated } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 
+export const dynamic = 'force-dynamic'
+
 async function getStats() {
   try {
     const [postsCount, kidsCount, settings] = await Promise.all([

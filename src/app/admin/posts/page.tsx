@@ -5,6 +5,8 @@ import { prisma } from '@/lib/prisma'
 import { formatPostDate } from '@/lib/utils'
 import DeletePostButton from './DeletePostButton'
 
+export const dynamic = 'force-dynamic'
+
 async function getPosts() {
   try {
     return await prisma.elfPost.findMany({

@@ -6,6 +6,8 @@ import ElfIntroVideo from '@/components/ElfIntroVideo'
 import NiceScoreCard from '@/components/NiceScoreCard'
 import Snowflakes from '@/components/Snowflakes'
 
+export const dynamic = 'force-dynamic'
+
 async function getSettings() {
   try {
     const settings = await prisma.settings.findUnique({

@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
+
+export const dynamic = 'force-dynamic'
 import { getSessionFromCookie, deleteSession, SESSION_COOKIE_NAME } from '@/lib/auth'
 
 export async function POST() {

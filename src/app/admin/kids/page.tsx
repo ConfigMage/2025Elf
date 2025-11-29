@@ -3,6 +3,8 @@ import { isAuthenticated } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import KidsManager from './KidsManager'
 
+export const dynamic = 'force-dynamic'
+
 async function getKids() {
   try {
     return await prisma.kid.findMany({
