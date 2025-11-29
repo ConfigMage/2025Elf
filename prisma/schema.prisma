@@ -1,0 +1,58 @@
+// Prisma schema for Elf on the Shelf app
+// Uses Neon Postgres
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// Elf posts - daily updates about where Sprinkles was found
+model ElfPost {
+  id          String   @id @default(cuid())
+  title       String
+  message     String   @db.Text
+  imageUrl    String?
+  location    String?  // Where in the house Sprinkles was found
+  postedAt    DateTime @default(now())
+  publishDate DateTime // The date this post should appear (for scheduling)
+  isPublished Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([publishDate])
+  @@index([isPublished])
+}
+
+// Kids in the family
+model Kid {
+  id        String   @id @default(cuid())
+  name      String
+  avatarUrl String?
+  niceScore Int      @default(100) // Santa's nice score (fun feature)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// App settings (stored in DB for easy admin updates)
+model Settings {
+  id              String   @id @default("main")
+  elfName         String   @default("Sprinkles")
+  elfIntroVideoUrl String?
+  welcomeMessage  String   @default("Welcome to Sprinkles' magical corner!")
+  revealAt        DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+// Admin sessions (simple token-based auth)
+model AdminSession {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
