@@ -75,28 +75,28 @@ export default function CountdownGate({ children }: CountdownGateProps) {
 
           <div className="grid grid-cols-4 gap-4 md:gap-8">
             <div className="text-center">
-              <div className="bg-white rounded-xl p-4 md:p-6 shadow-lg">
+              <div className="bg-elf-red rounded-xl p-4 md:p-6 shadow-lg">
                 <span className="countdown-number">{countdown.days}</span>
               </div>
               <p className="countdown-label text-white mt-2">Days</p>
             </div>
 
             <div className="text-center">
-              <div className="bg-white rounded-xl p-4 md:p-6 shadow-lg">
+              <div className="bg-elf-green rounded-xl p-4 md:p-6 shadow-lg">
                 <span className="countdown-number">{countdown.hours.toString().padStart(2, '0')}</span>
               </div>
               <p className="countdown-label text-white mt-2">Hours</p>
             </div>
 
             <div className="text-center">
-              <div className="bg-white rounded-xl p-4 md:p-6 shadow-lg">
+              <div className="bg-elf-red rounded-xl p-4 md:p-6 shadow-lg">
                 <span className="countdown-number">{countdown.minutes.toString().padStart(2, '0')}</span>
               </div>
               <p className="countdown-label text-white mt-2">Minutes</p>
             </div>
 
             <div className="text-center">
-              <div className="bg-white rounded-xl p-4 md:p-6 shadow-lg">
+              <div className="bg-elf-green rounded-xl p-4 md:p-6 shadow-lg">
                 <span className="countdown-number">{countdown.seconds.toString().padStart(2, '0')}</span>
               </div>
               <p className="countdown-label text-white mt-2">Seconds</p>
