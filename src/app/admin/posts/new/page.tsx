@@ -3,11 +3,13 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import ImageUpload from '@/components/ImageUpload'
 
 export default function NewPostPage() {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [imageUrl, setImageUrl] = useState('')
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -19,7 +21,7 @@ export default function NewPostPage() {
       title: formData.get('title'),
       message: formData.get('message'),
       location: formData.get('location') || null,
-      imageUrl: formData.get('imageUrl') || null,
+      imageUrl: imageUrl || null,
       publishDate: formData.get('publishDate'),
       isPublished: formData.get('isPublished') === 'on',
     }
@@ -107,19 +109,12 @@ export default function NewPostPage() {
           </div>
 
           <div>
-            <label htmlFor="imageUrl" className="block text-sm font-medium text-gray-700 mb-2">
-              Image URL
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Photo of Sprinkles
             </label>
-            <input
-              type="url"
-              id="imageUrl"
-              name="imageUrl"
-              placeholder="https://example.com/elf-photo.jpg"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-elf-red focus:border-transparent"
+            <ImageUpload
+              onImageUploaded={(url) => setImageUrl(url)}
             />
-            <p className="text-sm text-gray-500 mt-1">
-              Paste a URL to a photo of the elf
-            </p>
           </div>
 
           <div>

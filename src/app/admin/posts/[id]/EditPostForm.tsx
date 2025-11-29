@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import type { ElfPost } from '@prisma/client'
+import ImageUpload from '@/components/ImageUpload'
 
 interface EditPostFormProps {
   post: ElfPost
@@ -13,6 +14,7 @@ export default function EditPostForm({ post }: EditPostFormProps) {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [imageUrl, setImageUrl] = useState(post.imageUrl || '')
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -24,7 +26,7 @@ export default function EditPostForm({ post }: EditPostFormProps) {
       title: formData.get('title'),
       message: formData.get('message'),
       location: formData.get('location') || null,
-      imageUrl: formData.get('imageUrl') || null,
+      imageUrl: imageUrl || null,
       publishDate: formData.get('publishDate'),
       isPublished: formData.get('isPublished') === 'on',
     }
@@ -112,15 +114,12 @@ export default function EditPostForm({ post }: EditPostFormProps) {
           </div>
 
           <div>
-            <label htmlFor="imageUrl" className="block text-sm font-medium text-gray-700 mb-2">
-              Image URL
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Photo of Sprinkles
             </label>
-            <input
-              type="url"
-              id="imageUrl"
-              name="imageUrl"
-              defaultValue={post.imageUrl || ''}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-elf-red focus:border-transparent"
+            <ImageUpload
+              currentImageUrl={post.imageUrl}
+              onImageUploaded={(url) => setImageUrl(url)}
             />
           </div>
 
